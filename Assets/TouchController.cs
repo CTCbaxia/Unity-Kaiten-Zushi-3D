@@ -15,7 +15,8 @@ public class TouchController : MonoBehaviour
     private bool BeltSelected = false;
     private bool NonSelect = false;
     private bool DeSelect = false; // TBD deselect in the UI
-    public static bool TouchedPlate = false;
+    //public static bool TouchedPlate = false;
+    public static bool PlateOnGround = false;
 
     // Start is called before the first frame update
     void Start()
@@ -89,8 +90,26 @@ public class TouchController : MonoBehaviour
             if(objPlane.Raycast(ray, out rayDistance))
             {
                 obj.transform.position = ray.GetPoint(rayDistance);
-                TouchedPlate = false;
+                //TouchedPlate = false;
             }
+        }
+        else if(touch.phase == TouchPhase.Ended)
+        {
+            //RaycastHit hit;
+            //if (Physics.Raycast(obj.transform.position, obj.transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
+            //{
+            //    GameObject hitObject = hit.collider.gameObject;
+            //    if (hitObject.CompareTag("Ground") && !hitObject.CompareTag("Table") && !hitObject.CompareTag("Belt"))
+            //    {
+            //        if(obj.CompareTag("SushiPlate") || obj.CompareTag("SpecialPlate") || obj.CompareTag("DessertPlate"))
+            //        {
+            //            DestroyPlate(obj);
+            //        }
+            //    }
+
+            //}
+
+
         }
 
     }
@@ -188,5 +207,12 @@ public class TouchController : MonoBehaviour
             }
             GameController.pause = true;
         }
+    }
+    private void DestroyPlate(GameObject obj)
+    {
+
+        List<GameObject> list = GameController.list;
+        list.Remove(obj);
+        Destroy(obj);
     }
 }

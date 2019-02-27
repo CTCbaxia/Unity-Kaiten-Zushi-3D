@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlateController : MonoBehaviour
 {
 
-    private Vector3 endPos1 = new Vector3(-8.0f, 3, -8.0f);
-    private Vector3 endPos2 = new Vector3(-8.0f, 3, 8.0f);
-    private Vector3 endPos3 = new Vector3(8.0f, 3, 8.0f);
-    private Vector3 endPos4 = new Vector3(8.0f, 3, -8.0f);
+    private Vector3 endPos1 = new Vector3(-40f, 15, -40f);
+    private Vector3 endPos2 = new Vector3(-40f, 15, 40f);
+    private Vector3 endPos3 = new Vector3(40f, 15, 40f);
+    private Vector3 endPos4 = new Vector3(40f, 15, -40f);
 
     private bool left = true;
     private bool up = false;
@@ -20,7 +20,8 @@ public class PlateController : MonoBehaviour
     private bool OnGround = false;
     private float eatTimer = 20.0f;
     private float Timer;
-    private float speed = 5;
+    private float speed = 15;
+    public static bool ShouldDestroy = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +39,7 @@ public class PlateController : MonoBehaviour
                 DestroyPlate();
             }
         }
-
+       
         //plate move
         if (left)
         {

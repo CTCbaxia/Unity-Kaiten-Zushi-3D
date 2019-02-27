@@ -30,15 +30,15 @@ public class GameController : MonoBehaviour
             //rand = 1.5f;
             if (rand < 1.0f)
             {
-                list.Add(Instantiate(SushiPlate, new Vector3(5, 3, -7), Quaternion.identity));
+                list.Add(Instantiate(SushiPlate, new Vector3(25, 15, -35), Quaternion.identity));
             }
             else if (rand < 2.0f)
             {
-                list.Add(Instantiate(SpecialPlate, new Vector3(5, 3, -7), Quaternion.identity));
+                list.Add(Instantiate(SpecialPlate, new Vector3(25, 15, -35), Quaternion.identity));
             }
             else
             {
-                list.Add(Instantiate(DessertPlate, new Vector3(5, 3, -7), Quaternion.identity));
+                list.Add(Instantiate(DessertPlate, new Vector3(25, 15, -35), Quaternion.identity));
             }
         }
     }
