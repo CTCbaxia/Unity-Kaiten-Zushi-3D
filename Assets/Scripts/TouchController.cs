@@ -21,6 +21,8 @@ public class TouchController : MonoBehaviour
     public static bool PlateOnGround = false;
     public GameObject BeltPanel;
     public GameObject ChefPanel;
+    public GameObject Canvas;
+    public static GameObject GameCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,9 @@ public class TouchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameCanvas = Canvas;
+        //BPanel = BeltPanel;
+        //CPanel = ChefPanel;
 
         if (Input.touchCount == 0) return;
         Touch touch = Input.GetTouch(0);

@@ -14,13 +14,16 @@ public class GameController : MonoBehaviour
     private int i;
     private float duration = 20.0f;
     public static float ChefSpeed;
-
+    public Camera RCamera;
+    public Camera PCamera;
 
     void Start()
     {
         ChefSpeed = 4.0f;
         time = 0.0f;
         list = new List<GameObject>();
+        RCamera.depth = 0;
+        PCamera.depth = -1;
 
     }
 
@@ -28,6 +31,29 @@ public class GameController : MonoBehaviour
     void FixedUpdate()
     {
         if (pause) return;
+
+        if (CameraController.CameraChanged) 
+        {
+            print("RCamera.depth:"+RCamera.depth);
+            print("PCamera.depth:" + PCamera.depth);
+            ChangeView();
+            //string s = CameraController.CameraType;
+            //if (s.Equals("PERSONAL"))
+            //{
+            //    RCamera.enabled = true;
+            //    PCamera.enabled = false;
+            //}
+            //else if (s.Equals("RESTAURANT"))
+            //{
+            //    print("changeshhhhhhhhhhhh");
+            //    PCamera.enabled = true;
+            //    RCamera.enabled = false;
+
+            //}
+            print("After RCamera.depth:" + RCamera.depth);
+            print("After PCamera.depth:" + PCamera.depth);
+            CameraController.CameraChanged = false;
+        }
 
         time += Time.deltaTime;
         if (time > duration/ChefSpeed)
@@ -78,6 +104,31 @@ public class GameController : MonoBehaviour
         }else if (s.Equals("RESUME"))
         {
             Time.timeScale = 1.0f;
+        }
+    }
+
+    public void ChangeView()
+    {
+        print("changed view");
+        if (RCamera.depth > -1)
+        {
+
+            //viewSlider.SetActive(false);
+            RCamera.depth = -1;
+            PCamera.depth = 0;
+            //modeText.text = "Restaurant Mode";
+            //Vector3 v = TouchController.BPanel.transform.position;
+            //print(v.x + " " + v.y + " " +v.z);
+            //TouchController.GameCanvas.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //TouchController.GameCanvas.transform.position = new Vector3(0, -5.0f, 0);
+        }
+        else
+        {
+            //viewSlider.SetActive(true);
+            PCamera.depth = -1;
+            RCamera.depth = 0;
+            //modeText.text = "Player Mode";
+            //TouchController.BPanel.transform.position = new Vector3(1030, 1068, 0);
         }
     }
 }
