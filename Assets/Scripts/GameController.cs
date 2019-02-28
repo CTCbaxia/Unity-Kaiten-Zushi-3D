@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     public static float ChefSpeed;
     public Camera RCamera;
     public Camera PCamera;
+    public GameObject ViewPanelLR;
+    public GameObject ViewPanelUD;
 
     void Start()
     {
@@ -116,6 +118,8 @@ public class GameController : MonoBehaviour
             //viewSlider.SetActive(false);
             RCamera.depth = -1;
             PCamera.depth = 0;
+            ViewPanelLR.SetActive(true);
+            ViewPanelUD.SetActive(true);
             //modeText.text = "Restaurant Mode";
             //Vector3 v = TouchController.BPanel.transform.position;
             //print(v.x + " " + v.y + " " +v.z);
@@ -127,6 +131,8 @@ public class GameController : MonoBehaviour
             //viewSlider.SetActive(true);
             PCamera.depth = -1;
             RCamera.depth = 0;
+            ViewPanelLR.SetActive(false);
+            ViewPanelUD.SetActive(false);
             //modeText.text = "Player Mode";
             //TouchController.BPanel.transform.position = new Vector3(1030, 1068, 0);
         }

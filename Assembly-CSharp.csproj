@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\SpeedController.cs" />
     <Compile Include="Assets\Scripts\TableController.cs" />
     <Compile Include="Assets\Scripts\TouchController.cs" />
+    <Compile Include="Assets\ViewController.cs" />
     <None Include="Assets\_Assets\FREE Food Pack\Shaders\Food.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/CTC/Documents/3rd-Columbia/Courses/3D UI and Augmented Reality/HW1/Kaiten-Zushi 3D/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
