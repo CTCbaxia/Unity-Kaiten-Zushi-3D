@@ -15,7 +15,7 @@ public class TouchController : MonoBehaviour
     private bool BeltSelected = false;
     private bool ChefSelected = false;
     private bool NonSelect = false;
-    private bool DeSelect = false; // TBD deselect in the UI
+    public static bool DeSelect = false; // TBD deselect in the UI
     //public static bool TouchedPlate = false;
 
     public static bool PlateOnGround = false;
@@ -45,7 +45,6 @@ public class TouchController : MonoBehaviour
                 // assign for drag
                 obj = hit.transform.gameObject;
                 objPlane = new Plane(new Vector3(0, 1, 0), obj.transform.position);
-                print("here hit chef" + obj.CompareTag("Chef"));
                 if (obj.CompareTag("SushiPlate") || obj.CompareTag("SpecialPlate") || obj.CompareTag("DessertPlate") || obj.CompareTag("Belt") || obj.CompareTag("Chef"))
                 {
                     NonSelect = false;
@@ -72,11 +71,15 @@ public class TouchController : MonoBehaviour
 
                 // if we select some obj
                 if (!NonSelect) pre = obj;
+
                 if (DeSelect)
                 {
-                    PlateSelected = false;
-                    BeltSelected = false;
-                    ChefSelected = false;
+                    //pre = null;
+                    print("here");
+                    //PlateSelected = false;
+                    //BeltSelected = false;
+                    //ChefSelected = false;
+                    //DeSelect = false;
                 }
 
             }
@@ -85,6 +88,8 @@ public class TouchController : MonoBehaviour
         {
 
             if (obj == null) return;//if the object is destroyed when collision
+            // TBD: Add disable for moving when panel is shown
+
             if (!obj.CompareTag("SushiPlate") && !obj.CompareTag("SpecialPlate")&& !obj.CompareTag("DessertPlate"))
             {
                 return;
@@ -144,6 +149,7 @@ public class TouchController : MonoBehaviour
         }
         else if (BeltSelected)
         {
+            //change color
             GameObject b1 = preObj.transform.Find("up").gameObject;
             GameObject b2 = preObj.transform.Find("down").gameObject;
             GameObject b3 = preObj.transform.Find("left").gameObject;
@@ -153,28 +159,32 @@ public class TouchController : MonoBehaviour
             b3.GetComponent<Renderer>().material = PreSelect;
             b4.GetComponent<Renderer>().material = PreSelect;
 
-            List<GameObject> list = GameController.list;
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i].GetComponent<PlateController>().enabled = true;
-            }
-           
-            GameController.pause = false;
+            RestartPlates();
+
             // close panel
             BeltPanel.SetActive(false);
         }
         else if (ChefSelected)
         {
+            //change color
+            GameObject chef = preObj.transform.Find("Geo").Find("SuitGEO01").gameObject;//get this obj's plate child
+            chef.GetComponent<Renderer>().material = PreSelect;
+
+            RestartPlates();
+
+            // close panel
             ChefPanel.SetActive(false);
         }
     }
 
     void SelectObject(GameObject obj)
     {
+        if (obj == null) return;
         if (obj.CompareTag("SushiPlate") || obj.CompareTag("SpecialPlate") || obj.CompareTag("DessertPlate"))
         {
             PlateSelected = true;
             BeltSelected = false;
+            ChefSelected = false;
             NonSelect = false;
 
             //change color
@@ -198,6 +208,7 @@ public class TouchController : MonoBehaviour
         {
             PlateSelected = false;
             BeltSelected = true;
+            ChefSelected = false;
             NonSelect = false;
 
             //change belt color
@@ -211,15 +222,7 @@ public class TouchController : MonoBehaviour
             b3.GetComponent<Renderer>().material = OnSelect;
             b4.GetComponent<Renderer>().material = OnSelect;
 
-            // stop moving plates
-            List<GameObject> list = GameController.list;
-            for(int i = 0; i < list.Count; i++)
-            {
-                list[i].GetComponent<PlateController>().enabled = false;
-            }
-
-            // stop creating plates
-            GameController.pause = true;
+            StopPlates();
 
             // open panel
             BeltPanel.SetActive(true);
@@ -227,6 +230,19 @@ public class TouchController : MonoBehaviour
         }
         else if (obj.CompareTag("Chef"))
         {
+            PlateSelected = false;
+            BeltSelected = false;
+            ChefSelected = true;
+            NonSelect = false;
+
+            // change chef color
+            GameObject chef = obj.transform.Find("Geo").Find("SuitGEO01").gameObject;//get this obj's plate child
+            PreSelect = chef.GetComponent<Renderer>().material;
+            chef.GetComponent<Renderer>().material = OnSelect;
+
+            StopPlates();
+
+            // open panel
             ChefPanel.SetActive(true);
         }
     }
@@ -237,4 +253,31 @@ public class TouchController : MonoBehaviour
         list.Remove(obj);
         Destroy(obj);
     }
+    private void StopPlates()
+    {
+        // stop moving plates
+        List<GameObject> list = GameController.list;
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].GetComponent<PlateController>().enabled = false;
+        }
+
+        // stop creating plates
+        GameController.pause = true;
+
+    }
+    private void RestartPlates()
+    {
+        // recover plate moving
+        List<GameObject> list = GameController.list;
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].GetComponent<PlateController>().enabled = true;
+        }
+
+        // recovering output plates
+        GameController.pause = false;
+
+    }
+   
 }

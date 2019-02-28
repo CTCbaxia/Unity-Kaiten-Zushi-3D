@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public GameObject SpecialPlate;
     public GameObject DessertPlate;
     public static List<GameObject> list;
+    private Transform trans = null;
+    private int i;
     private float duration = 20.0f;
     public static float ChefSpeed;
 
@@ -26,7 +28,6 @@ public class GameController : MonoBehaviour
     void FixedUpdate()
     {
         if (pause) return;
-
 
         time += Time.deltaTime;
         if (time > duration/ChefSpeed)
@@ -47,7 +48,28 @@ public class GameController : MonoBehaviour
                 list.Add(Instantiate(DessertPlate, new Vector3(25, 15, -35), Quaternion.identity));
             }
         }
+
+        for (i = 0; i < list.Count; i++)
+        {
+            if (list[i].GetComponent<PlateController>().OnBelt || list[i].GetComponent<PlateController>().OnTray)
+            {
+                print(i);
+                trans = list[i].transform;
+                break;
+            }
+        }
+        if(i < list.Count)
+        {
+            ChefLightController.target = trans;
+        }
+        else
+        {
+            ChefLightController.target = null;
+        }
+
+
     }
+
     public void PauseAndResume(string s)
     {
         if (s.Equals("PAUSE"))

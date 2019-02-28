@@ -15,8 +15,8 @@ public class PlateController : MonoBehaviour
     private bool right = false;
     private bool down = false;
     private bool OnTable = false;
-    private bool OnBelt = true;
-    private bool OnTray = false;
+    public bool OnBelt = true;
+    public bool OnTray = false;
     private bool OnGround = false;
     private float eatTimer = 20.0f;
     private float Timer;
@@ -31,6 +31,8 @@ public class PlateController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+
         if (OnTable)
         {
             Timer -= Time.deltaTime;
