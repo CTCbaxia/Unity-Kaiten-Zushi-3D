@@ -20,11 +20,12 @@ public class PlateController : MonoBehaviour
     private bool OnGround = false;
     private float eatTimer = 20.0f;
     private float Timer;
-    private float speed = 15;
+    public static float speed = 15;
     public static bool ShouldDestroy = false;
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -33,13 +34,13 @@ public class PlateController : MonoBehaviour
         if (OnTable)
         {
             Timer -= Time.deltaTime;
-            if(Timer < 0)
+            if (Timer < 0)
             {
                 print("eat by the user");
                 DestroyPlate();
             }
         }
-       
+
         //plate move
         if (left)
         {
@@ -108,6 +109,13 @@ public class PlateController : MonoBehaviour
         {
             MoveDown();
         }
+        else if (other.CompareTag("Tray"))
+        {
+                OnTable = false;
+                OnTray = true;
+
+
+        }
         // put on to table
         else if (other.CompareTag("Table"))
         {
@@ -126,10 +134,26 @@ public class PlateController : MonoBehaviour
             print("destroy by collision here");
             DestroyPlate();
         }
-       
+
     }
 
-    void DestroyPlate()
+    private void OnTriggerExit(Collider other)
+    {
+        if (OnTray && (other.CompareTag("BeltDown") || other.CompareTag("BeltLeft") || other.CompareTag("BeltUp") || other.CompareTag("BeltRight")))
+        {
+            OnBelt = false;
+            if (ModeController.GameMode.Equals("HARD"))
+            {
+                left = false;
+                up = false;
+                right = false;
+                down = false;
+                OnTable = false;
+            }
+        }
+
+    }
+        void DestroyPlate()
     {
 
         List<GameObject> list = GameController.list;

@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{2D0A1E53-1C30-9155-5465-D932EC21C69C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlateController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ModeController.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameController.cs" Line="33" Column="1" />
-      <File FileName="Assets/TouchController.cs" Line="95" Column="1" />
-      <File FileName="Assets/TableController.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/PlateController.cs" Line="15" Column="32" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="31" Column="29" />
+      <File FileName="Assets/Scripts/TouchController.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/TableController.cs" Line="15" Column="50" />
+      <File FileName="Assets/Scripts/PlateController.cs" Line="8" Column="51" />
+      <File FileName="Assets/Scripts/ModeController.cs" Line="7" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

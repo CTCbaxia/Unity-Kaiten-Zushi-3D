@@ -60,14 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\IceCreamController.cs" />
-    <Compile Include="Assets\SaucePlateController.cs" />
     <Compile Include="Assets\Scripts\DessertPlateController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\IceCreamController.cs" />
+    <Compile Include="Assets\Scripts\ModeController.cs" />
     <Compile Include="Assets\Scripts\PlateController.cs" />
+    <Compile Include="Assets\Scripts\SaucePlateController.cs" />
     <Compile Include="Assets\Scripts\SpecialPlateController.cs" />
-    <Compile Include="Assets\TableController.cs" />
-    <Compile Include="Assets\TouchController.cs" />
+    <Compile Include="Assets\Scripts\TableController.cs" />
+    <Compile Include="Assets\Scripts\TouchController.cs" />
     <None Include="Assets\_Assets\FREE Food Pack\Shaders\Food.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/CTC/Documents/3rd-Columbia/Courses/3D UI and Augmented Reality/HW1/Kaiten-Zushi 3D/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
