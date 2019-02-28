@@ -19,6 +19,7 @@ TagManager:
   - Table
   - Tray
   - Ground
+  - Chef
   layers:
   - Default
   - TransparentFX

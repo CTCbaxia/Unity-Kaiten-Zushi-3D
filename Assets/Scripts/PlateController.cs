@@ -20,7 +20,7 @@ public class PlateController : MonoBehaviour
     private bool OnGround = false;
     private float eatTimer = 20.0f;
     private float Timer;
-    public static float speed = 15;
+    public static float PlateSpeed = 15;
     public static bool ShouldDestroy = false;
     // Start is called before the first frame update
     void Start()
@@ -46,7 +46,7 @@ public class PlateController : MonoBehaviour
         {
             if (transform.position != endPos1)
             {
-                transform.position = Vector3.MoveTowards(transform.position, endPos1, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, endPos1, PlateSpeed * Time.deltaTime);
             }
             else
             {
@@ -59,7 +59,7 @@ public class PlateController : MonoBehaviour
         {
             if (transform.position != endPos2)
             {
-                transform.position = Vector3.MoveTowards(transform.position, endPos2, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, endPos2, PlateSpeed * Time.deltaTime);
             }
             else
             {
@@ -71,7 +71,7 @@ public class PlateController : MonoBehaviour
         {
             if (transform.position != endPos3)
             {
-                transform.position = Vector3.MoveTowards(transform.position, endPos3, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, endPos3, PlateSpeed * Time.deltaTime);
             }
             else
             {
@@ -83,7 +83,7 @@ public class PlateController : MonoBehaviour
         {
             if (transform.position != endPos4)
             {
-                transform.position = Vector3.MoveTowards(transform.position, endPos4, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, endPos4, PlateSpeed * Time.deltaTime);
             }
             else
             {

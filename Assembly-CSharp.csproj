@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\PlateController.cs" />
     <Compile Include="Assets\Scripts\SaucePlateController.cs" />
     <Compile Include="Assets\Scripts\SpecialPlateController.cs" />
+    <Compile Include="Assets\Scripts\SpeedController.cs" />
     <Compile Include="Assets\Scripts\TableController.cs" />
     <Compile Include="Assets\Scripts\TouchController.cs" />
     <None Include="Assets\_Assets\FREE Food Pack\Shaders\Food.shader" />

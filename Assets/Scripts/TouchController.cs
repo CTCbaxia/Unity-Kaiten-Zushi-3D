@@ -13,10 +13,14 @@ public class TouchController : MonoBehaviour
     private bool TouchedOnce = false;
     private bool PlateSelected = false;
     private bool BeltSelected = false;
+    private bool ChefSelected = false;
     private bool NonSelect = false;
     private bool DeSelect = false; // TBD deselect in the UI
     //public static bool TouchedPlate = false;
+
     public static bool PlateOnGround = false;
+    public GameObject BeltPanel;
+    public GameObject ChefPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -41,8 +45,8 @@ public class TouchController : MonoBehaviour
                 // assign for drag
                 obj = hit.transform.gameObject;
                 objPlane = new Plane(new Vector3(0, 1, 0), obj.transform.position);
-
-                if (obj.CompareTag("SushiPlate") || obj.CompareTag("SpecialPlate") || obj.CompareTag("DessertPlate") || obj.CompareTag("Belt"))
+                print("here hit chef" + obj.CompareTag("Chef"));
+                if (obj.CompareTag("SushiPlate") || obj.CompareTag("SpecialPlate") || obj.CompareTag("DessertPlate") || obj.CompareTag("Belt") || obj.CompareTag("Chef"))
                 {
                     NonSelect = false;
                 }
@@ -52,7 +56,7 @@ public class TouchController : MonoBehaviour
                 }
 
                 // deselect pre (if we select before, and this time select new)
-                if ((PlateSelected || BeltSelected) && (!NonSelect || DeSelect))
+                if ((PlateSelected || BeltSelected || ChefSelected) && (!NonSelect || DeSelect))
                 {
                     DeSelectObject(pre);
 
@@ -72,6 +76,7 @@ public class TouchController : MonoBehaviour
                 {
                     PlateSelected = false;
                     BeltSelected = false;
+                    ChefSelected = false;
                 }
 
             }
@@ -155,6 +160,12 @@ public class TouchController : MonoBehaviour
             }
            
             GameController.pause = false;
+            // close panel
+            BeltPanel.SetActive(false);
+        }
+        else if (ChefSelected)
+        {
+            ChefPanel.SetActive(false);
         }
     }
 
@@ -189,6 +200,7 @@ public class TouchController : MonoBehaviour
             BeltSelected = true;
             NonSelect = false;
 
+            //change belt color
             GameObject b1 = obj.transform.Find("up").gameObject;
             GameObject b2 = obj.transform.Find("down").gameObject;
             GameObject b3 = obj.transform.Find("left").gameObject;
@@ -198,14 +210,24 @@ public class TouchController : MonoBehaviour
             b2.GetComponent<Renderer>().material = OnSelect;
             b3.GetComponent<Renderer>().material = OnSelect;
             b4.GetComponent<Renderer>().material = OnSelect;
-            //GetComponent<PlateController>().enabled = false;
 
+            // stop moving plates
             List<GameObject> list = GameController.list;
             for(int i = 0; i < list.Count; i++)
             {
                 list[i].GetComponent<PlateController>().enabled = false;
             }
+
+            // stop creating plates
             GameController.pause = true;
+
+            // open panel
+            BeltPanel.SetActive(true);
+
+        }
+        else if (obj.CompareTag("Chef"))
+        {
+            ChefPanel.SetActive(true);
         }
     }
     private void DestroyPlate(GameObject obj)

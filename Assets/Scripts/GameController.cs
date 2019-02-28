@@ -10,9 +10,14 @@ public class GameController : MonoBehaviour
     public GameObject SpecialPlate;
     public GameObject DessertPlate;
     public static List<GameObject> list;
+    private float duration = 20.0f;
+    public static float ChefSpeed;
+
+
     void Start()
     {
-        time = 0f;
+        ChefSpeed = 4.0f;
+        time = 0.0f;
         list = new List<GameObject>();
 
     }
@@ -22,10 +27,11 @@ public class GameController : MonoBehaviour
     {
         if (pause) return;
 
+
         time += Time.deltaTime;
-        if (time > 3.0f)
+        if (time > duration/ChefSpeed)
         {
-            time = 0f;
+            time = 0.0f;
             float rand = Random.Range(0, 3.0f);
             //rand = 1.5f;
             if (rand < 1.0f)
@@ -40,6 +46,16 @@ public class GameController : MonoBehaviour
             {
                 list.Add(Instantiate(DessertPlate, new Vector3(25, 15, -35), Quaternion.identity));
             }
+        }
+    }
+    public void PauseAndResume(string s)
+    {
+        if (s.Equals("PAUSE"))
+        {
+            Time.timeScale = 0.0f;
+        }else if (s.Equals("RESUME"))
+        {
+            Time.timeScale = 1.0f;
         }
     }
 }
